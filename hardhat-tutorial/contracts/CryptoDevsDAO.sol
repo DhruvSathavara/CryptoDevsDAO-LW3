@@ -164,13 +164,13 @@ contract CryptoDevsDAO is Ownable {
         // Did proposal pass?
         if (proposal.yayVotes > proposal.nayVotes) {
             uint256 nftPrice = nftMarketplace.getPrice();
+            proposal.executed = true;
             require(
                 address(this).balance >= nftPrice,
                 "contract has not enough funds"
             );
             nftMarketplace.purchase{value: nftPrice}(proposal.nftTokenId);
         }
-        proposal.executed == true;
     }
 
     //withdrawEther allows the contract owner (deployer) to withdraw the ETH from the contract
